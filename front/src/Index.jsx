@@ -1,9 +1,5 @@
 import React from "react";
-import {
-    BrowserRouter as Router,
-    Link
-} from "react-router-dom";
-import Home from "./Home";
+import {Link} from "react-router-dom"
 
 class Index extends React.Component {
     render() {
@@ -16,24 +12,34 @@ class Index extends React.Component {
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <Router>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item active">
-                                    <a className="nav-link" to="/">Home <span className="sr-only">(current)</span></a>
+                                    <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/criptografar">Criptografa</Link>
+                                    <Link className="nav-link" to="/criptografar">Criptografar</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/descriptografar">Descriptografa</Link>
+                                    <Link className="nav-link" to="/descriptografar">Descriptografar</Link>
                                 </li>
                             </ul>
                         </div>
-                    </Router>
                 </nav>
 
-                <Home></Home>
+                <div className="container mx-auto text-light mb-5" style={{ flex: "1", maxWidth: "42em" }}>
+                    <main className="text-center text-justify">
+                        <br></br>
+                        <h1 className="font-weight-bold mb-3 pb-3">PROJETO - RSA</h1>
+                        <p className="lead text-justify">Bem-vindo(a) ao Projeto de RSA. Por meio desse projeto você poderá realizar
+                        processos voltados a criptografia, com o intuito de proteger suas informações ao repassá-las para outras
+                        pessoas.
+            </p>
+                            <Link className="btn btn-light mt-2" to="/criptografar" role="button">Criptografar <i className="fas fa-lock"></i></Link>
+                            <Link className="btn btn-light mt-2" to="/descriptografar" role="button">Descriptografar <i class="fas fa-lock-open"></i></Link>
+                    </main>
+
+                </div>
 
                 <footer>
                     <span className="text-light text-bold ml-2">Desenvolvedores:</span>

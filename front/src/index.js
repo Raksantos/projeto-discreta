@@ -9,10 +9,10 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
-            <Route exact path="/" component={Index}></Route>
-            <Route path="/criptografar" component={Criptografar}></Route>
-            <Route path="/descriptografar" component={Descriptografar}></Route>
-            <Redirect to="/" />
+            <Route exact path={"/"} component={Index}></Route>
+            <Route path={"/criptografar"} component={Criptografar}></Route>
+            <Route path={"/descriptografar"} component={Descriptografar}></Route>
+            <Redirect to={"/"}></Redirect>
         </Switch>
     </BrowserRouter>
     , document.getElementById('root'));
