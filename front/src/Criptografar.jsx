@@ -29,12 +29,30 @@ class Criptografar extends React.Component{
                 </nav>
 
                 <div className="container mx-auto text-light mb-5" style={{ flex: "1", maxWidth: "42em" }}>
-                    <main className="text-center text-justify">
+                    <form className="text-center text-justify">
                         <br></br>
                         <h1 className="font-weight-bold mb-3 pb-3">CRIPTOGRAFAR</h1>
                         <textarea placeholder="Informe aqui o texto para ser criptografado" class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
-                        <button type="button" class="btn btn-light mt-2 center calcular">Criptografar</button>
-                    </main>
+
+                        <br></br>
+
+                        <p className="text-light">OU</p>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">Escolha o arquivo: </span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                aria-describedby="inputGroupFileAddon01"/>
+                                <label class="custom-file-label" for="inputGroupFile01"></label>
+                            </div>
+                        </div>
+                        
+                        <br></br>
+
+                        <button type="submit" class="btn btn-light mt-2 center calcular">Criptografar</button>
+                    </form> 
 
                 </div>
 
