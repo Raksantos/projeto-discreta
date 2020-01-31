@@ -1,10 +1,9 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
-class Descriptografar extends React.Component{
-
-    render(){
-        return(
+class GerarChave extends React.Component {
+    render() {
+        return (
             <div className="bg-danger" style={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light mb-5">
                     <a className="navbar-brand" href="index.html">Projeto-RSA</a>
@@ -13,32 +12,31 @@ class Descriptografar extends React.Component{
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul className="navbar-nav mr-auto">
-                                <li className="nav-item active">
-                                    <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/gerarchave">Gerar Chave</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/criptografar">Criptografar</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/descriptografar">Descriptografar</Link>
-                                </li>
-                            </ul>
-                        </div>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item active">
+                                <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/gerarchave">Gerar Chave</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/criptografar">Criptografar</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/descriptografar">Descriptografar</Link>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
 
                 <div className="container mx-auto text-light mb-5" style={{ flex: "1", maxWidth: "42em" }}>
-                <form className="text-center text-justify">
+                    <form className="text-center text-justify">
                         <br></br>
-                        <h1 className="font-weight-bold mb-3 pb-3">DESCRIPTOGRAFAR</h1>
-                        <textarea placeholder="Informe aqui o texto para ser criptografado" class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+                        <h1 className="font-weight-bold mb-3 pb-3">CHAVE PÚBLICA</h1>
 
                         <br></br>
-                        
+
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="entrada-p">Número P: </span>
@@ -62,9 +60,8 @@ class Descriptografar extends React.Component{
 
                         <br></br>
 
-                        <button type="submit" class="btn btn-light mt-2 center descriptografar">Descriptografar</button>
-                    </form> 
-
+                        <button type="submit" class="btn btn-light mt-2 center criptografar">Criar a chave</button>
+                    </form>
                 </div>
 
                 <footer>
@@ -92,7 +89,6 @@ class Descriptografar extends React.Component{
             </div>
         );
     }
-
 }
 
-export default Descriptografar;
+export default GerarChave;

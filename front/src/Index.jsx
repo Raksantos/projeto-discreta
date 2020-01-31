@@ -18,6 +18,9 @@ class Index extends React.Component {
                                     <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
                                 </li>
                                 <li className="nav-item">
+                                    <Link className="nav-link" to="/gerarchave">Gerar Chave</Link>
+                                </li>
+                                <li className="nav-item">
                                     <Link className="nav-link" to="/criptografar">Criptografar</Link>
                                 </li>
                                 <li className="nav-item">
@@ -35,6 +38,7 @@ class Index extends React.Component {
                         processos voltados a criptografia, com o intuito de proteger suas informações ao repassá-las para outras
                         pessoas.
             </p>
+                            <Link className="btn btn-light mt-2" to="/gerarchave" role="button">Gerar Chave<i class="fas fa-key"></i></Link>
                             <Link className="btn btn-light mt-2" to="/criptografar" role="button">Criptografar <i className="fas fa-lock"></i></Link>
                             <Link className="btn btn-light mt-2" to="/descriptografar" role="button">Descriptografar <i class="fas fa-lock-open"></i></Link>
                     </main>

@@ -19,6 +19,9 @@ class Criptografar extends React.Component{
                                     <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
                                 </li>
                                 <li className="nav-item">
+                                    <Link className="nav-link" to="/gerarchave">Gerar Chave</Link>
+                                </li>
+                                <li className="nav-item">
                                     <Link className="nav-link" to="/criptografar">Criptografar</Link>
                                 </li>
                                 <li className="nav-item">
@@ -41,13 +44,6 @@ class Criptografar extends React.Component{
                                 <span class="input-group-text" id="chave-publica">Chave Pública: </span>
                             </div>
                             <input type="text" class="form-control" id="chave-pu" aria-describedby="basic-addon3"/>
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="chave-privada">Chave Privada: </span>
-                            </div>
-                            <input type="text" class="form-control" id="chave-pr" aria-describedby="basic-addon3"/>
                         </div>
 
                         <br></br>
