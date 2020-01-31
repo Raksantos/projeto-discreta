@@ -35,23 +35,24 @@ class Criptografar extends React.Component{
                         <textarea placeholder="Informe aqui o texto para ser criptografado" class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
 
                         <br></br>
-
-                        <p className="text-light">OU</p>
-
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupFileAddon01">Escolha o arquivo: </span>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon01"/>
-                                <label class="custom-file-label" for="inputGroupFile01"></label>
-                            </div>
-                        </div>
                         
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="chave-publica">Chave Pública: </span>
+                            </div>
+                            <input type="text" class="form-control" id="chave-pu" aria-describedby="basic-addon3"/>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="chave-privada">Chave Privada: </span>
+                            </div>
+                            <input type="text" class="form-control" id="chave-pr" aria-describedby="basic-addon3"/>
+                        </div>
+
                         <br></br>
 
-                        <button type="submit" class="btn btn-light mt-2 center calcular">Criptografar</button>
+                        <button type="submit" class="btn btn-light mt-2 center criptografar">Criptografar</button>
                     </form> 
 
                 </div>

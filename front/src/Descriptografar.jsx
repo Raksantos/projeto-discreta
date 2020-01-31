@@ -29,48 +29,31 @@ class Descriptografar extends React.Component{
                 </nav>
 
                 <div className="container mx-auto text-light mb-5" style={{ flex: "1", maxWidth: "42em" }}>
-                    <form className="text-center text-justify">
+                <form className="text-center text-justify">
                         <br></br>
                         <h1 className="font-weight-bold mb-3 pb-3">DESCRIPTOGRAFAR</h1>
                         <textarea placeholder="Informe aqui o texto para ser criptografado" class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+
                         <br></br>
+                        
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Chave: </span>
+                                <span class="input-group-text" id="chave-publica">Chave Pública: </span>
                             </div>
-                                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+                            <input type="text" class="form-control" id="chave-pu" aria-describedby="basic-addon3"/>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="chave-privada">Chave Privada: </span>
                             </div>
+                            <input type="text" class="form-control" id="chave-pr" aria-describedby="basic-addon3"/>
+                        </div>
 
-                            <p className="text-light">OU</p>
+                        <br></br>
 
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupFileAddon01">Arquivo cripotrafado: </span>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                    aria-describedby="inputGroupFileAddon01"/>
-                                    <label class="custom-file-label" for="inputGroupFile01"></label>
-                                </div>
-                            </div>
-
-                            <br></br>
-
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupFileAddon01">Chave: </span>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                    aria-describedby="inputGroupFileAddon01"/>
-                                    <label class="custom-file-label" for="inputGroupFile01"></label>
-                                </div>
-                            </div>
-                            
-                            <br></br>
-
-                        <button type="submit" class="btn btn-light mt-2 center calcular">Descriptografar</button>
-                    </form>
+                        <button type="submit" class="btn btn-light mt-2 center descriptografar">Descriptografar</button>
+                    </form> 
 
                 </div>
 
