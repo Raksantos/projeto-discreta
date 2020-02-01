@@ -35,27 +35,27 @@ class Descriptografar extends React.Component{
                 <form className="text-center text-justify">
                         <br></br>
                         <h1 className="font-weight-bold mb-3 pb-3">DESCRIPTOGRAFAR</h1>
-                        <textarea placeholder="Informe aqui o texto para ser criptografado" class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+                        <textarea placeholder="Informe aqui o texto para ser criptografado" class="form-control" id="msg" rows="4"></textarea>
 
                         <br></br>
                         
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="entrada-p">Número P: </span>
+                                <span class="input-group-text" id="entrada-p">P: </span>
                             </div>
                             <input type="text" class="form-control" id="primo-p" aria-describedby="basic-addon3" />
                         </div>
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="entrada-q">Número Q: </span>
+                                <span class="input-group-text" id="entrada-q">Q: </span>
                             </div>
                             <input type="text" class="form-control" id="primo-q" aria-describedby="basic-addon3" />
                         </div>
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="entrada-e">Expoente E: </span>
+                                <span class="input-group-text" id="entrada-e">E: </span>
                             </div>
                             <input type="text" class="form-control" id="expoente-e" aria-describedby="basic-addon3" />
                         </div>

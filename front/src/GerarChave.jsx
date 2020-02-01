@@ -39,21 +39,21 @@ class GerarChave extends React.Component {
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="entrada-p">Número P: </span>
+                                <span class="input-group-text" id="entrada-p">P: </span>
                             </div>
                             <input type="text" class="form-control" id="primo-p" aria-describedby="basic-addon3" />
                         </div>
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="entrada-q">Número Q: </span>
+                                <span class="input-group-text" id="entrada-q">Q: </span>
                             </div>
                             <input type="text" class="form-control" id="primo-q" aria-describedby="basic-addon3" />
                         </div>
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="entrada-e">Expoente E: </span>
+                                <span class="input-group-text" id="entrada-e">E: </span>
                             </div>
                             <input type="text" class="form-control" id="expoente-e" aria-describedby="basic-addon3" />
                         </div>

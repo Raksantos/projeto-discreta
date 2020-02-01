@@ -35,15 +35,22 @@ class Criptografar extends React.Component{
                     <form className="text-center text-justify">
                         <br></br>
                         <h1 className="font-weight-bold mb-3 pb-3">CRIPTOGRAFAR</h1>
-                        <textarea placeholder="Informe aqui o texto para ser criptografado" class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+                        <textarea placeholder="Informe aqui o texto para ser criptografado" class="form-control" id="msg" rows="4"></textarea>
 
                         <br></br>
                         
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="chave-publica">Chave Pública: </span>
+                                <span class="input-group-text" id="entrada-e">E: </span>
                             </div>
-                            <input type="text" class="form-control" id="chave-pu" aria-describedby="basic-addon3"/>
+                            <input type="text" class="form-control" id="e" aria-describedby="basic-addon3" />
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="entrada-n">N: </span>
+                            </div>
+                            <input type="text" class="form-control" id="n" aria-describedby="basic-addon3" />
                         </div>
 
                         <br></br>
