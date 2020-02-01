@@ -26,7 +26,7 @@ def primalidade_fermat(n, k):
     if n == 2 or n == 3:
         return True
     
-    for x in range(k):
+    for _ in range(k):
         a = random.randint(2, n - 2)
         if(pow(a, n - 1, n) != 1):
             return False
