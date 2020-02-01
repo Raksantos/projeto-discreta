@@ -1,6 +1,8 @@
 from rsa import RSA
 from flask import Flask, abort, request, jsonify
+from flask_cors import CORS
 app = Flask(__name__)
+cors = CORS(app, resource={r"/*":{"origins": "*"}})
 
 @app.route('/')
 def helloWorld():

@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom"
+import axios from 'axios'
+
+const baseUrl = "http://127.0.0.1:5000/rsa/";
 
 class GerarChave extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             number_p: "",
@@ -11,20 +14,74 @@ class GerarChave extends React.Component {
             number_e: ""
         }
 
-        this.handleChange = this.handleChange.bind(this);
+        //this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
+        this.gerarPrimo = this.gerarPrimo.bind(this);
     }
 
-    handleChange(event){
+    // handleChange(event){
+    //     const target = event.target;
+    //     const value = target.value;
+    //     const name = target.name;
+
+    //     this.setState({ [name]: value });
+    // }
+
+    gerarPrimo(event) {
+        event.preventDefault();
+
         const target = event.target;
-        const value = target.value;
         const name = target.name;
 
-        this.setState({ [name]: value });
+        axios.get(baseUrl + 'gerar-primo').then(res => {
+            let resp = res.data;
+
+            if (resp.erro === 0) {
+                console.log(resp);
+            }
+            else {
+                console.log(resp);
+
+                if (name === "number_p") {
+
+                    this.setState({number_p: resp["result"]})
+                    let botao_p = document.querySelector(".gerar-p");
+                    let new_button = document.createElement('button');
+                    let icon_new_button = document.createElement('i');
+
+                    icon_new_button.className = "fas fa-arrow-down";
+
+                    new_button.appendChild(icon_new_button);
+
+                    new_button.className = "btn btn-light download-p mt-2 ml-2";
+
+                    botao_p.after(new_button);
+
+                    document.querySelector("#primo-p").innerHTML = resp["result"];
+                }
+
+                if (name === "number_q") {
+                    this.setState({number_q: resp["result"]});
+
+                    let botato_q = document.querySelector(".gerar-q");
+                    let new_button = document.createElement('button');
+                    let icon_new_button = document.createElement('i');
+
+
+                    icon_new_button.className = "fas fa-arrow-down";
+                    new_button.appendChild(icon_new_button);
+
+                    new_button.className = "btn btn-light download-p mt-2 ml-2";
+
+                    botato_q.after(new_button);
+
+                    document.querySelector("#primo-q").innerHTML = resp["result"];
+                }
+            }
+        }).catch((error) => console.log(error));
     }
 
-    handleSubmit(event){
+    handleSubmit(event) {
         event.preventDefault();
 
         console.log(this.state);
@@ -69,24 +126,23 @@ class GerarChave extends React.Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="entrada-p">P: </span>
                             </div>
-                            <input type="text" name="number_p" onChange={this.handleChange} className="form-control" id="primo-p" aria-describedby="basic-addon3" />
-                            <button type="submit" onClick={this.handleSubmit} className="btn btn-light gerar-p ml-2">Gerar</button>
+                            <div type="text" name="number_q" className="card-body bg-light text-dark" id="primo-p" aria-describedby="basic-addon3"></div>
+                            <button type="submit" name="number_p" onClick={this.gerarPrimo} className="btn btn-light gerar-p ml-2">Gerar</button>
                         </div>
 
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="entrada-q">Q: </span>
                             </div>
-                            <input type="text" name="number_q" onChange={this.handleChange} className="form-control" id="primo-q" aria-describedby="basic-addon3" />
-                            <button type="submit" onClick={this.handleSubmit} className="btn btn-light gerar-q ml-2">Gerar</button>
+                            <div type="text" name="number_q" className="card-body bg-light text-dark" id="primo-q" aria-describedby="basic-addon3"></div>
+                            <button type="submit" name="number_q" onClick={this.gerarPrimo} className="btn btn-light gerar-q ml-2">Gerar</button>
                         </div>
 
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="entrada-e">E: </span>
                             </div>
-                            <input type="text" name="number_e" onChange={this.handleChange} className="form-control" id="expoente-e" aria-describedby="basic-addon3" />
-                            <button type="submit" onClick={this.handleSubmit} className="btn btn-light gerar-e ml-2">Gerar</button>
+                            <div type="text" name="number_q" className="card-body bg-light text-dark" id="primo-e" aria-describedby="basic-addon3"></div>
                         </div>
 
                         <br></br>
