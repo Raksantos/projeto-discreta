@@ -78,7 +78,7 @@ def calcular_e(p, q):
 def gerar_chave_publica(p, q, e):
     n = p * q
     
-    chave = {'e': e, 'n': n}
+    chave = {'e': str(e), 'n': str(n)}
 
     return chave
 

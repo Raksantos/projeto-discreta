@@ -9,28 +9,28 @@ def helloWorld():
 @app.route('/rsa/gerar-primo', methods=['GET'])
 def gerar_primo():
     primo = RSA.gerar_primo(256)
-    return jsonify({'result': primo})
+    return jsonify({'result': str(primo)})
 
 @app.route('/rsa/gerar-numero-e', methods=['POST'])
 def gerar_e():
     if not request.json:
         abort(400)
 
-    p = request.json['p']
-    q = request.json['q']
+    p = int(request.json['p'])
+    q = int(request.json['q'])
 
     e = RSA.calcular_e(p, q)
     
-    return jsonify({'result': e})
+    return jsonify({'result': str(e)})
 
 @app.route('/rsa/gerar-chave-publica', methods=['POST'])
 def gerar_chave_publica():
     if not request.json:
         abort(400)
 
-    p = request.json['p']
-    q = request.json['q']
-    e = request.json['e']
+    p = int(request.json['p'])
+    q = int(request.json['q'])
+    e = int(request.json['e'])
 
     chave = RSA.gerar_chave_publica(p, q, e)
 
@@ -42,8 +42,8 @@ def encriptar():
         abort(400)
     
     msg = request.json['msg']
-    e = request.json['e']
-    n = request.json['n']
+    e = int(request.json['e'])
+    n = int(request.json['n'])
 
     msg_encriptada = RSA.encriptar(msg, e, n)
 
@@ -55,9 +55,9 @@ def desencriptar():
         abort(400)
     
     msg = request.json['msg']
-    p = request.json['p']
-    q = request.json['q']
-    e = request.json['e']
+    p = int(request.json['p'])
+    q = int(request.json['q'])
+    e = int(request.json['e'])
 
     msg_desencriptada = RSA.desencriptar(msg, p, q, e)
 
