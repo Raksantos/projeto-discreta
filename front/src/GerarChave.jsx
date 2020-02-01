@@ -2,6 +2,34 @@ import React from "react";
 import { Link } from "react-router-dom"
 
 class GerarChave extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            number_p: "",
+            number_q: "",
+            number_e: ""
+        }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+
+    }
+
+    handleChange(event){
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({ [name]: value });
+    }
+
+    handleSubmit(event){
+        event.preventDefault();
+
+        console.log(this.state);
+    }
+
     render() {
         return (
             <div className="bg-danger" style={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}>
@@ -37,30 +65,33 @@ class GerarChave extends React.Component {
 
                         <br></br>
 
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="entrada-p">P: </span>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="entrada-p">P: </span>
                             </div>
-                            <input type="text" class="form-control" id="primo-p" aria-describedby="basic-addon3" />
+                            <input type="text" name="number_p" onChange={this.handleChange} className="form-control" id="primo-p" aria-describedby="basic-addon3" />
+                            <button type="submit" onClick={this.handleSubmit} className="btn btn-light gerar-p ml-2">Gerar</button>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="entrada-q">Q: </span>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="entrada-q">Q: </span>
                             </div>
-                            <input type="text" class="form-control" id="primo-q" aria-describedby="basic-addon3" />
+                            <input type="text" name="number_q" onChange={this.handleChange} className="form-control" id="primo-q" aria-describedby="basic-addon3" />
+                            <button type="submit" onClick={this.handleSubmit} className="btn btn-light gerar-q ml-2">Gerar</button>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="entrada-e">E: </span>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="entrada-e">E: </span>
                             </div>
-                            <input type="text" class="form-control" id="expoente-e" aria-describedby="basic-addon3" />
+                            <input type="text" name="number_e" onChange={this.handleChange} className="form-control" id="expoente-e" aria-describedby="basic-addon3" />
+                            <button type="submit" onClick={this.handleSubmit} className="btn btn-light gerar-e ml-2">Gerar</button>
                         </div>
 
                         <br></br>
 
-                        <button type="submit" class="btn btn-light mt-2 center criptografar">Criar a chave</button>
+                        <button type="submit" className="btn btn-light gerar-q ml-2">Gerar Chave</button>
                     </form>
                 </div>
 
@@ -79,13 +110,13 @@ class GerarChave extends React.Component {
 
                 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
                     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                    crossorigin="anonymous"></script>
+                    crossOrigin="anonymous"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
                     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-                    crossorigin="anonymous"></script>
+                    crossOrigin="anonymous"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
                     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-                    crossorigin="anonymous"></script>
+                    crossOrigin="anonymous"></script>
             </div>
         );
     }
