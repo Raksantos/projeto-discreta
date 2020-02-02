@@ -4,6 +4,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 cors = CORS(app, resource={r"/*":{"origins": "*"}})
 
+@app.route('/')
+def helloWorld():
+    return 'Working!'
+
 @app.route('/rsa/gerar-primo', methods=['GET'])
 def gerar_primo():
     primo = RSA.gerar_primo(256)

@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom"
 import axios from 'axios'
 
-const baseUrl = "http://127.0.0.1:5000/rsa/";
+const baseUrl = "https://api-rsa.herokuapp.com/rsa/";
 
 class Descriptografar extends React.Component{
 
@@ -138,7 +138,7 @@ class Descriptografar extends React.Component{
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item active">
-                                    <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
+                                    <Link className="nav-link" to="/">Home</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/gerarchave">Gerar Chave</Link>
@@ -147,7 +147,7 @@ class Descriptografar extends React.Component{
                                     <Link className="nav-link" to="/criptografar">Criptografar</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/descriptografar">Descriptografar</Link>
+                                    <Link className="nav-link" to="/descriptografar">Descriptografar <span className="sr-only">(current)</span></Link>
                                 </li>
                             </ul>
                         </div>
