@@ -1,5 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom"
+import axios from 'axios'
+
+const baseUrl = "http://127.0.0.1:5000/rsa/";
 
 class Criptografar extends React.Component{
 
@@ -9,6 +12,8 @@ class Criptografar extends React.Component{
             mensagem: "",
             number_e: "",
             number_n: "",
+            temMensagem: 0,
+            mensagemCriptografada: "",
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -23,10 +28,84 @@ class Criptografar extends React.Component{
         this.setState({ [name]: value });
     }
 
+    downloadFile(event) {
+        event.preventDefault();
+
+        const element = document.createElement("a");
+
+        const file = new Blob([document.getElementById("card-body-key").value, { type: 'text/plain' }]);            
+        element.href = URL.createObjectURL(file);
+        element.download = "mensagemCriptografada.txt";
+        document.body.appendChild(element);
+        element.click();
+
+    }
+
     handleSubmit(event){
         event.preventDefault();
 
-        console.log(this.state);
+        let json = {
+            msg: this.state.mensagem,
+            e: this.state.number_e,
+            n: this.state.number_n
+        }
+
+        axios.post(baseUrl + 'encriptar', json).then(res => {
+            let resp = res.data;
+
+            if (resp.erro === 0) {
+                console.log("Ocorreu um erro inesperado");
+            }
+
+            else {
+                let result = resp["result"];
+                this.setState({mensagemCriptografada: result});
+
+                if (this.state.temMensagem === 0) {
+
+                    this.setState({temMensagem: 1});
+                    let new_card = document.createElement("div");
+
+                    new_card.className = "card text-dark mt-4 card-key";
+
+                    let card_title = document.createElement("div");
+
+                    card_title.className = "card-header";
+                    card_title.innerHTML = "Frase Criptografada";
+
+                    new_card.appendChild(card_title);
+
+                    let card_body = document.createElement("textarea");
+
+                    card_body.className = "card-body";
+                    card_body.id = "card-body-key";
+                    card_body.rows = 4;
+                    card_body.onchange = this.handleChange;
+                    card_body.value = `${this.state.mensagemCriptografada}`;
+
+                    new_card.appendChild(card_body);
+
+                    document.querySelector(".criptografar").after(new_card);
+
+                    let card_key = document.querySelector(".card-key");
+                    let new_button = document.createElement('button');
+                    let icon_new_button = document.createElement('i');
+
+
+                    icon_new_button.className = "fas fa-file-download";
+                    new_button.appendChild(icon_new_button);
+                    new_button.className = "btn btn-light download-key mt-2 ml-2";
+                    new_button.id = "download-key";
+                    new_button.onclick = this.downloadFile;
+
+                    card_key.after(new_button);
+
+                }else{
+                    let card_body = document.getElementById("card-body-key");
+                    card_body.value = `${this.state.public_key_e}`;
+                }
+            }
+        }).catch((error) => console.log(error));
     }
 
     render(){
