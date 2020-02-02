@@ -1,1 +1,1 @@
-web: npm start --prefix front
+web: npm build --prefix front
