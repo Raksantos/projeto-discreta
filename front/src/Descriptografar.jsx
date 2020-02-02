@@ -73,7 +73,7 @@ class Descriptografar extends React.Component{
                         let card_title = document.createElement("div");
 
                         card_title.className = "card-header";
-                        card_title.innerHTML = "Frase Descriptografada";
+                        card_title.innerHTML = "Mensagem Descriptografada";
 
                         new_card.appendChild(card_title);
 
@@ -95,8 +95,9 @@ class Descriptografar extends React.Component{
 
 
                         icon_new_button.className = "fas fa-file-download";
-                        new_button.appendChild(icon_new_button);
+                        new_button.innerText = "Download ";
                         new_button.className = "btn btn-light download-key mt-2 ml-2";
+                        new_button.appendChild(icon_new_button);
                         new_button.id = "download-key";
                         new_button.onclick = this.downloadFile;
 
@@ -116,7 +117,7 @@ class Descriptografar extends React.Component{
 
         const element = document.createElement("a");
 
-        const file = new Blob([document.getElementById("card-body-key").value, { type: 'text/plain' }]);            
+        const file = new Blob([document.getElementById("card-body-key").value], { type: 'text/plain' });            
         element.href = URL.createObjectURL(file);
         element.download = "mensagemDescriptografada.txt";
         document.body.appendChild(element);
@@ -152,7 +153,7 @@ class Descriptografar extends React.Component{
                         </div>
                 </nav>
 
-                <div className="container mx-auto text-light mb-5" style={{ flex: "1", maxWidth: "42em" }}>
+                <div className="container mx-auto text-light mb-5" style={{ flex: "1", maxWidth: "58em" }}>
                 <form className="text-center text-justify">
                         <br></br>
                         <h1 className="font-weight-bold mb-3 pb-3">DESCRIPTOGRAFAR</h1>
@@ -183,7 +184,7 @@ class Descriptografar extends React.Component{
 
                         <br></br>
 
-                        <button type="submit" onClick={this.handleSubmit} className="btn btn-light mt-2 center descriptografar">Descriptografar</button>
+                        <button type="submit" onClick={this.handleSubmit} className="btn btn-light mt-2 center descriptografar">Descriptografar <i className="fas fa-lock-open"></i></button>
                     </form> 
 
                 </div>

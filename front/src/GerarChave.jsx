@@ -52,7 +52,7 @@ class GerarChave extends React.Component {
 
                     new_button.appendChild(icon_new_button);
 
-                    new_button.className = "btn btn-light download-p mt-2 ml-2";
+                    new_button.className = "btn btn-light download-p ml-2";
                     new_button.id = "download-p";
                     new_button.onclick = this.downloadFile;
 
@@ -75,7 +75,7 @@ class GerarChave extends React.Component {
 
                     icon_new_button.className = "fas fa-file-download";
                     new_button.appendChild(icon_new_button);
-                    new_button.className = "btn btn-light download-q mt-2 ml-2";
+                    new_button.className = "btn btn-light download-q ml-2";
                     new_button.id = "download-q";
                     new_button.onclick = this.downloadFile;
 
@@ -125,7 +125,7 @@ class GerarChave extends React.Component {
 
                         icon_new_button.className = "fas fa-file-download";
                         new_button.appendChild(icon_new_button);
-                        new_button.className = "btn btn-light download-e mt-2 ml-2";
+                        new_button.className = "btn btn-light download-e ml-2";
                         new_button.id = "download-e";
                         new_button.onclick = this.downloadFile;
 
@@ -150,7 +150,9 @@ class GerarChave extends React.Component {
         const element = document.createElement("a");
 
         if (id === "download-p") {
-            const file = new Blob([document.getElementById("primo-p").value, { type: 'text/plain' }]);            
+            console.log(document.getElementById("primo-p").value);
+            const file = new Blob([document.getElementById("primo-p").value], { type: 'text/plain' });
+            console.log(file);
             element.href = URL.createObjectURL(file);
             element.download = "numberP.txt";
             document.body.appendChild(element);
@@ -158,14 +160,14 @@ class GerarChave extends React.Component {
         }
 
         else if (id === "download-q") {
-            const file = new Blob([document.getElementById("primo-q").value, { type: 'text/plain' }]);
+            const file = new Blob([document.getElementById("primo-q").value], { type: 'text/plain' });
             element.href = URL.createObjectURL(file);
             element.download = "numberQ.txt";
             document.body.appendChild(element);
             element.click();
         }
         else if (id === "download-e") {
-            const file = new Blob([document.getElementById("primo-e").value, { type: 'text/plain' }]);
+            const file = new Blob([document.getElementById("primo-e").value], { type: 'text/plain' });
             element.href = URL.createObjectURL(file);
             element.download = "numberE.txt";
             document.body.appendChild(element);
@@ -173,7 +175,7 @@ class GerarChave extends React.Component {
         }
         else if (id === "download-key")
         {
-            const file = new Blob([document.getElementById("card-body-key").value, { type: 'text/plain' }]);
+            const file = new Blob([document.getElementById("card-body-key").value], { type: 'text/plain' });
             element.href = URL.createObjectURL(file);
             element.download = "publicKey.txt";
             document.body.appendChild(element);
@@ -228,7 +230,7 @@ class GerarChave extends React.Component {
                         let card_title = document.createElement("div");
 
                         card_title.className = "card-header";
-                        card_title.innerHTML = "Chave Pública";
+                        card_title.innerHTML = "Chave Pública (e, n)";
 
                         new_card.appendChild(card_title);
 
@@ -250,9 +252,10 @@ class GerarChave extends React.Component {
 
 
                         icon_new_button.className = "fas fa-file-download";
-                        new_button.appendChild(icon_new_button);
                         new_button.className = "btn btn-light download-key mt-2 ml-2";
+                        new_button.innerText = "Download ";
                         new_button.id = "download-key";
+                        new_button.appendChild(icon_new_button);
                         new_button.onclick = this.downloadFile;
 
                         card_key.after(new_button);
@@ -294,7 +297,7 @@ class GerarChave extends React.Component {
                     </div>
                 </nav>
 
-                <div className="container mx-auto text-light mb-5" style={{ flex: "1", maxWidth: "42em" }}>
+                <div className="container mx-auto text-light mb-5" style={{ flex: "1", maxWidth: "58em" }}>
                     <form className="text-center text-justify">
                         <br></br>
                         <h1 className="font-weight-bold mb-3 pb-3">CHAVE PÚBLICA</h1>
@@ -305,7 +308,7 @@ class GerarChave extends React.Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="entrada-p">P: </span>
                             </div>
-                            <input onChange={this.handleChange} type="text" value={this.state.number_p} name="number_p" className="card-body bg-light text-dark" id="primo-p" aria-describedby="basic-addon3" />
+                            <input onChange={this.handleChange} type="text" value={this.state.number_p} name="number_p" className="form-control" id="primo-p" />
                             <button type="submit" name="number_p" onClick={this.gerarPrimo} className="btn btn-light gerar-p ml-2">Gerar</button>
                         </div>
 
@@ -313,7 +316,7 @@ class GerarChave extends React.Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="entrada-q">Q: </span>
                             </div>
-                            <input type="text" onChange={this.handleChange} value={this.state.number_q} name="number_q" className="card-body bg-light text-dark" id="primo-q" aria-describedby="basic-addon3" />
+                            <input type="text" onChange={this.handleChange} value={this.state.number_q} name="number_q" className="form-control" id="primo-q" />
                             <button type="submit" name="number_q" onClick={this.gerarPrimo} className="btn btn-light gerar-q ml-2">Gerar</button>
                         </div>
 
@@ -321,13 +324,13 @@ class GerarChave extends React.Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="entrada-e">E: </span>
                             </div>
-                            <input type="text" onChange={this.handleChange} value={this.state.number_e} name="number_e" className="card-body bg-light text-dark" id="primo-e" aria-describedby="basic-addon3" />
+                            <input type="text" onChange={this.handleChange} value={this.state.number_e} name="number_e" className="form-control" id="primo-e" />
                             <button type="submit" name="number_e" onClick={this.gerarE} className="btn btn-light gerar-e ml-2">Gerar</button>
                         </div>
 
                         <br></br>
 
-                        <button type="submit" onClick={this.handleSubmit} className="btn btn-light gerar-chave ml-2">Gerar Chave</button>
+                        <button type="submit" onClick={this.handleSubmit} className="btn btn-light gerar-chave ml-2">Gerar Chave <i className="fas fa-key"></i></button>
                     </form>
                 </div>
 
