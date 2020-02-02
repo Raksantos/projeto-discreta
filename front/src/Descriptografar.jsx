@@ -12,7 +12,9 @@ class Descriptografar extends React.Component{
             mensagem: "",
             number_p: "",
             number_q: "",
-            number_e: ""
+            number_e: "",
+            temMensagem: 0,
+            mensagemDescri: "",
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -30,10 +32,98 @@ class Descriptografar extends React.Component{
     handleSubmit(event){
         event.preventDefault();
 
-        console.log(this.state);
+        if(this.state.mensagem === "") alert("Por favor, insira um texto válido!");
+
+        else if(this.state.number_p === "") alert("Por favor, insira um número P!");
+
+        else if(this.state.number_q === "") alert("Por favor, insira um número Q!");
+
+        else if(this.state.number_e === "") alert("Por favor, insira um número E!");
+
+        else{
+
+            let json = {
+                msg: this.state.mensagem,
+                p: this.state.number_p,
+                q: this.state.number_q,
+                e: this.state.number_e
+            }
+
+            axios.post(baseUrl + 'desencriptar', json).then(res => {
+                let resp = res.data;
+
+                if (resp.erro === 0) {
+                    console.log("Ocorreu um erro inesperado");
+                }
+
+                else {
+
+                    console.log(resp);
+
+                    let result = resp["result"];
+                    this.setState({ mensagemDescri: result });
+
+                    if (this.state.temMensagem === 0) {
+
+                        this.setState({ temMensagem: 1 });
+                        let new_card = document.createElement("div");
+
+                        new_card.className = "card text-dark mt-4 card-key";
+
+                        let card_title = document.createElement("div");
+
+                        card_title.className = "card-header";
+                        card_title.innerHTML = "Frase Descriptografada";
+
+                        new_card.appendChild(card_title);
+
+                        let card_body = document.createElement("textarea");
+
+                        card_body.className = "card-body";
+                        card_body.id = "card-body-key";
+                        card_body.rows = 4;
+                        card_body.onchange = this.handleChange;
+                        card_body.value = `${this.state.mensagemDescri}`;
+
+                        new_card.appendChild(card_body);
+
+                        document.querySelector(".descriptografar").after(new_card);
+
+                        let card_key = document.querySelector(".card-key");
+                        let new_button = document.createElement('button');
+                        let icon_new_button = document.createElement('i');
+
+
+                        icon_new_button.className = "fas fa-file-download";
+                        new_button.appendChild(icon_new_button);
+                        new_button.className = "btn btn-light download-key mt-2 ml-2";
+                        new_button.id = "download-key";
+                        new_button.onclick = this.downloadFile;
+
+                        card_key.after(new_button);
+
+                    } else {
+                        let card_body = document.getElementById("card-body-key");
+                        card_body.value = `${this.state.mensagemDescri}`;
+                    }
+                }
+            }).catch((error) => console.log(error));
+        }
     }
 
-    
+    downloadFile(event) {
+        event.preventDefault();
+
+        const element = document.createElement("a");
+
+        const file = new Blob([document.getElementById("card-body-key").value, { type: 'text/plain' }]);            
+        element.href = URL.createObjectURL(file);
+        element.download = "mensagemDescriptografada.txt";
+        document.body.appendChild(element);
+        element.click();
+
+    }
+
     render(){
         return(
             <div className="bg-danger" style={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}>
