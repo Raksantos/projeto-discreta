@@ -1,11 +1,28 @@
-# projeto-discreta
+# Projeto de Matemática Discreta - Criptografia RSA
+
 Projeto para a nota final da disciplina de Matemática Discreta, na Universidade Federal de Alagoas
 
-# Instalando o flask
+## Instalando o flask
 
 https://linuxize.com/post/how-to-install-flask-on-ubuntu-18-04/
 
-# Links usados para as funções de criptografia
+## Executando o projeto
+
+### Front-End
+
+```bash
+    cd front
+    npm start
+```
+
+### Back-End
+
+```bash
+    cd flask_app
+    flask run
+```
+
+## Links usados para as funções de criptografia
 
 https://br.ccm.net/faq/9951-exemplo-de-algoritmo-assimetrico-rsa
 

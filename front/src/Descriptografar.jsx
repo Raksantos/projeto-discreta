@@ -137,7 +137,7 @@ class Descriptografar extends React.Component{
                     </button>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav mr-auto">
-                                <li className="nav-item active">
+                                <li className="nav-item">
                                     <Link className="nav-link" to="/">Home</Link>
                                 </li>
                                 <li className="nav-item">
@@ -146,7 +146,7 @@ class Descriptografar extends React.Component{
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/criptografar">Criptografar</Link>
                                 </li>
-                                <li className="nav-item">
+                                <li className="nav-item active">
                                     <Link className="nav-link" to="/descriptografar">Descriptografar <span className="sr-only">(current)</span></Link>
                                 </li>
                             </ul>
