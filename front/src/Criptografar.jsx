@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom"
 import axios from 'axios'
 
-const baseUrl = "http://127.0.0.1:5000/rsa/";
+const baseUrl = "https://api-rsa.herokuapp.com/rsa/";
 
 class Criptografar extends React.Component {
 
