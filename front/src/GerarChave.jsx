@@ -11,21 +11,16 @@ class GerarChave extends React.Component {
         this.state = {
             number_p: "",
             number_q: "",
-            number_e: ""
+            number_e: "",
+            thereIsP: 0,
+            thereIsQ: 0,
+            thereIsE: 0
         }
 
-        //this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.gerarPrimo = this.gerarPrimo.bind(this);
+        this.gerarE = this.gerarE.bind(this);
     }
-
-    // handleChange(event){
-    //     const target = event.target;
-    //     const value = target.value;
-    //     const name = target.name;
-
-    //     this.setState({ [name]: value });
-    // }
 
     gerarPrimo(event) {
         event.preventDefault();
@@ -37,14 +32,13 @@ class GerarChave extends React.Component {
             let resp = res.data;
 
             if (resp.erro === 0) {
-                console.log(resp);
+                //console.log(resp);
             }
             else {
-                console.log(resp);
 
-                if (name === "number_p") {
-
-                    this.setState({number_p: resp["result"]})
+                if (name === "number_p" && this.state.thereIsP === 0) {
+                    this.setState({ number_p: resp["result"] });
+                    this.setState({ thereIsP: 1 });
                     let botao_p = document.querySelector(".gerar-p");
                     let new_button = document.createElement('button');
                     let icon_new_button = document.createElement('i');
@@ -60,9 +54,9 @@ class GerarChave extends React.Component {
                     document.querySelector("#primo-p").innerHTML = resp["result"];
                 }
 
-                if (name === "number_q") {
-                    this.setState({number_q: resp["result"]});
-
+                if (name === "number_q" && this.state.thereIsQ === 0) {
+                    this.setState({ number_q: resp["result"] });
+                    this.setState({ thereIsQ: 1 });
                     let botato_q = document.querySelector(".gerar-q");
                     let new_button = document.createElement('button');
                     let icon_new_button = document.createElement('i');
@@ -79,6 +73,54 @@ class GerarChave extends React.Component {
                 }
             }
         }).catch((error) => console.log(error));
+    }
+
+    gerarE(event) {
+        event.preventDefault();
+
+        if (this.state.number_p === "") {
+            alert("Por favor, gere um valor para o número P.");
+        }
+        else if (this.state.number_q === "") {
+            alert("Por favor, gere um valor para o número Q")
+        }
+        else {
+
+            let json = {
+                p: this.state.number_p,
+                q: this.state.number_q
+            }
+
+            axios.post(baseUrl + 'gerar-numero-e', json).then(res => {
+                let resp = res.data;
+
+                if (resp.erro === 0) {
+                    console.log("Ocorreu um erro inesperado");
+                    alert("Ocorreu um erro inesperado!");
+                }
+                else {
+                    if (this.state.thereIsE === 0) {
+                        this.setState({ number_e: resp["result"] });
+                        this.setState({ thereIsE: 1 });
+                        console.log(this.state.number_e);
+
+                        let botato_e = document.querySelector(".gerar-e");
+                        let new_button = document.createElement('button');
+                        let icon_new_button = document.createElement('i');
+
+
+                        icon_new_button.className = "fas fa-arrow-down";
+                        new_button.appendChild(icon_new_button);
+
+                        new_button.className = "btn btn-light download-p mt-2 ml-2";
+
+                        botato_e.after(new_button);
+
+                        document.querySelector("#primo-e").innerHTML = resp["result"];
+                    }
+                }
+            }).catch((error) => console.log(error));
+        }
     }
 
     handleSubmit(event) {
@@ -142,7 +184,8 @@ class GerarChave extends React.Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="entrada-e">E: </span>
                             </div>
-                            <div type="text" name="number_q" className="card-body bg-light text-dark" id="primo-e" aria-describedby="basic-addon3"></div>
+                            <div type="text" name="number_e" className="card-body bg-light text-dark" id="primo-e" aria-describedby="basic-addon3"></div>
+                            <button type="submit" name="number_e" onClick={this.gerarE} className="btn btn-light gerar-e ml-2">Gerar</button>
                         </div>
 
                         <br></br>
