@@ -14,7 +14,10 @@ class GerarChave extends React.Component {
             number_e: "",
             thereIsP: 0,
             thereIsQ: 0,
-            thereIsE: 0
+            thereIsE: 0,
+            thereIsKey: 0,
+            public_key_e: "",
+            public_key_n: ""
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -57,9 +60,8 @@ class GerarChave extends React.Component {
 
                     document.querySelector("#primo-p").innerHTML = resp["result"];
                 }
-                
-                else if(name === "number_p" && this.state.thereIsP === 1)
-                {
+
+                else if (name === "number_p" && this.state.thereIsP === 1) {
                     this.setState({ number_p: resp["result"] });
                 }
 
@@ -81,8 +83,7 @@ class GerarChave extends React.Component {
 
                     document.querySelector("#primo-q").innerHTML = resp["result"];
                 }
-                else if(name === "number_q" && this.state.thereIsP === 1)
-                {
+                else if (name === "number_q" && this.state.thereIsP === 1) {
                     this.setState({ number_q: resp["result"] });
                 }
             }
@@ -132,7 +133,7 @@ class GerarChave extends React.Component {
 
                         document.querySelector("#primo-e").innerHTML = resp["result"];
                     }
-                    else{
+                    else {
                         this.setState({ number_e: resp["result"] });
                     }
                 }
@@ -140,7 +141,7 @@ class GerarChave extends React.Component {
         }
     }
 
-    downloadFile(event){
+    downloadFile(event) {
         event.preventDefault();
 
         const target = event.target;
@@ -148,25 +149,33 @@ class GerarChave extends React.Component {
 
         const element = document.createElement("a");
 
-        if(id === "download-p"){
-            const file = new Blob([document.getElementById("primo-p").value, {type: 'text/plain'}]);
+        if (id === "download-p") {
+            const file = new Blob([document.getElementById("primo-p").value, { type: 'text/plain' }]);            
             element.href = URL.createObjectURL(file);
             element.download = "numberP.txt";
             document.body.appendChild(element);
             element.click();
         }
-        else if(id === "download-q"){
-            const file = new Blob([document.getElementById("primo-q").value, {type: 'text/plain'}]);
+
+        else if (id === "download-q") {
+            const file = new Blob([document.getElementById("primo-q").value, { type: 'text/plain' }]);
             element.href = URL.createObjectURL(file);
             element.download = "numberQ.txt";
             document.body.appendChild(element);
             element.click();
         }
-        else if(id === "download-e")
-        {
-            const file = new Blob([document.getElementById("primo-e").value, {type: 'text/plain'}]);
+        else if (id === "download-e") {
+            const file = new Blob([document.getElementById("primo-e").value, { type: 'text/plain' }]);
             element.href = URL.createObjectURL(file);
             element.download = "numberE.txt";
+            document.body.appendChild(element);
+            element.click();
+        }
+        else if (id === "download-key")
+        {
+            const file = new Blob([document.getElementById("card-body-key").value, { type: 'text/plain' }]);
+            element.href = URL.createObjectURL(file);
+            element.download = "publicKey.txt";
             document.body.appendChild(element);
             element.click();
         }
@@ -190,23 +199,68 @@ class GerarChave extends React.Component {
             e: this.state.number_e
         }
 
-        if(this.state.number_p === "") alert("Por favor, gere um número P válido!");
+        if (this.state.number_p === "") alert("Por favor, gere um número P válido!");
 
-        else if(this.state.number_q === "") alert("Por favor, gere um número Q válido!");
+        else if (this.state.number_q === "") alert("Por favor, gere um número Q válido!");
 
-        else if(this.state.number_e === "") alert("Por favor, gere um número E válido!");
+        else if (this.state.number_e === "") alert("Por favor, gere um número E válido!");
 
-        else{
+        else {
             axios.post(baseUrl + 'gerar-chave-publica', json).then(res => {
                 let resp = res.data;
-    
-                if(resp.erro === 0){
+
+                if (resp.erro === 0) {
                     console.log("Ocorreu um erro inesperado");
                 }
-                    
-                else
-                {
-                    console.log(resp);
+
+                else {
+                    let result = resp["result"];
+                    this.setState({ public_key_e: result["e"] });
+                    this.setState({ public_key_n: result["n"] });
+
+                    if (this.state.thereIsKey === 0) {
+                        this.setState({thereIsKey: 1});
+
+                        let new_card = document.createElement("div");
+
+                        new_card.className = "card text-dark mt-4 card-key";
+
+                        let card_title = document.createElement("div");
+
+                        card_title.className = "card-header";
+                        card_title.innerHTML = "Chave Pública";
+
+                        new_card.appendChild(card_title);
+
+                        let card_body = document.createElement("textarea");
+
+                        card_body.className = "card-body";
+                        card_body.id = "card-body-key";
+                        card_body.rows = 4;
+                        card_body.onchange = this.handleChange;
+                        card_body.value = `${this.state.public_key_e} ${this.state.public_key_n}`;
+
+                        new_card.appendChild(card_body);
+
+                        document.querySelector(".gerar-chave").after(new_card);
+
+                        let card_key = document.querySelector(".card-key");
+                        let new_button = document.createElement('button');
+                        let icon_new_button = document.createElement('i');
+
+
+                        icon_new_button.className = "fas fa-file-download";
+                        new_button.appendChild(icon_new_button);
+                        new_button.className = "btn btn-light download-key mt-2 ml-2";
+                        new_button.id = "download-key";
+                        new_button.onclick = this.downloadFile;
+
+                        card_key.after(new_button);
+
+                    }else{
+                        let card_body = document.getElementById("card-body-key");
+                        card_body.value = `${this.state.public_key_e} ${this.state.public_key_n}`;
+                    }
                 }
             }).catch((error) => console.log(error));
         }
@@ -251,7 +305,7 @@ class GerarChave extends React.Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="entrada-p">P: </span>
                             </div>
-                            <input onChange={this.handleChange} type="text" value={this.state.number_p} name="number_p" className="card-body bg-light text-dark" id="primo-p" aria-describedby="basic-addon3"/>
+                            <input onChange={this.handleChange} type="text" value={this.state.number_p} name="number_p" className="card-body bg-light text-dark" id="primo-p" aria-describedby="basic-addon3" />
                             <button type="submit" name="number_p" onClick={this.gerarPrimo} className="btn btn-light gerar-p ml-2">Gerar</button>
                         </div>
 
@@ -259,7 +313,7 @@ class GerarChave extends React.Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="entrada-q">Q: </span>
                             </div>
-                            <input type="text" onChange={this.handleChange} value={this.state.number_q} name="number_q" className="card-body bg-light text-dark" id="primo-q" aria-describedby="basic-addon3"/>
+                            <input type="text" onChange={this.handleChange} value={this.state.number_q} name="number_q" className="card-body bg-light text-dark" id="primo-q" aria-describedby="basic-addon3" />
                             <button type="submit" name="number_q" onClick={this.gerarPrimo} className="btn btn-light gerar-q ml-2">Gerar</button>
                         </div>
 
@@ -267,13 +321,13 @@ class GerarChave extends React.Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="entrada-e">E: </span>
                             </div>
-                            <input type="text" onChange={this.handleChange} value={this.state.number_e} name="number_e" className="card-body bg-light text-dark" id="primo-e" aria-describedby="basic-addon3"/>
+                            <input type="text" onChange={this.handleChange} value={this.state.number_e} name="number_e" className="card-body bg-light text-dark" id="primo-e" aria-describedby="basic-addon3" />
                             <button type="submit" name="number_e" onClick={this.gerarE} className="btn btn-light gerar-e ml-2">Gerar</button>
                         </div>
 
                         <br></br>
 
-                        <button type="submit" onClick={this.handleSubmit} className="btn btn-light gerar-q ml-2">Gerar Chave</button>
+                        <button type="submit" onClick={this.handleSubmit} className="btn btn-light gerar-chave ml-2">Gerar Chave</button>
                     </form>
                 </div>
 
